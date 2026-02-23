@@ -70,6 +70,17 @@ GET    /api/dashboard        - Stats based on user role
 cp .env.example .env
 ```
 
+Edit `.env` and set `MONGODB_URI` (e.g. `mongodb://localhost:27017/client_portal`).
+
+---
+
+## Getting Started
+
+1. Install dependencies: `npm install`
+2. Ensure MongoDB is running locally (or use a remote URI in `.env`).
+3. Start the server: `npm run dev` (or `npm start`).
+4. Create the first admin user: `POST /api/auth/register` with body `{ "email": "admin@example.com", "password": "yourpassword", "role": "admin" }`.
+
 ---
 
 ## API Documentation
