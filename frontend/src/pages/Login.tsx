@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
+import { Footer } from '@/components/Footer'
 
 export function Login() {
   const [email, setEmail] = useState('')
@@ -25,8 +26,9 @@ export function Login() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
+    <div className="flex min-h-screen flex-col bg-gray-100">
+      <div className="flex flex-1 items-center justify-center px-4">
+        <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
         <h1 className="mb-6 text-2xl font-bold text-gray-800">Iniciar sesión</h1>
         {error && (
           <div className="mb-4 rounded bg-red-100 p-3 text-sm text-red-700">{error}</div>
@@ -67,7 +69,9 @@ export function Login() {
         <p className="mt-4 text-center text-sm text-gray-600">
           ¿No tienes cuenta? <Link to="/register" className="text-blue-600 hover:underline">Regístrate</Link>
         </p>
+        </div>
       </div>
+      <Footer />
     </div>
   )
 }

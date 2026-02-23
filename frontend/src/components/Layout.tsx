@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
+import { Footer } from '@/components/Footer'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth()
@@ -12,7 +13,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="flex min-h-screen flex-col bg-gray-50">
       <nav className="border-b bg-white shadow-sm">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
           <div className="flex items-center gap-6">
@@ -42,7 +43,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </nav>
-      <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
+      <main className="mx-auto flex-1 max-w-6xl px-4 py-6">{children}</main>
+      <Footer />
     </div>
   )
 }
