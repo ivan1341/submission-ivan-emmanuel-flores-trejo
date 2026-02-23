@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
+import { AuthHeader } from '@/components/AuthHeader'
 import { Footer } from '@/components/Footer'
 
 export function Login() {
@@ -28,7 +29,8 @@ export function Login() {
   return (
     <div className="flex min-h-screen flex-col bg-gray-100">
       <div className="flex flex-1 items-center justify-center px-4">
-        <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
+        <div className="w-full max-w-lg rounded-lg bg-white p-6 shadow-md sm:p-8 md:max-w-xl">
+        <AuthHeader title="Bienvenido al Client Portal" subtitle="Inicia sesión para ver tus proyectos y comentarios." />
         <h1 className="mb-6 text-2xl font-bold text-gray-800">Iniciar sesión</h1>
         {error && (
           <div className="mb-4 rounded bg-red-100 p-3 text-sm text-red-700">{error}</div>

@@ -41,6 +41,13 @@ export interface Comment {
   user?: { email: string; name?: string }
 }
 
+export interface ClientUser {
+  id: string
+  email: string
+  name?: string
+  role?: 'admin' | 'client'
+}
+
 export function fetchProjects(): Promise<Project[]> {
   return api<Project[]>('/projects')
 }
@@ -67,4 +74,8 @@ export function addComment(projectId: string, content: string): Promise<Comment>
 
 export function fetchStats(): Promise<{ active: number; completed: number; onHold: number }> {
   return api<{ active: number; completed: number; onHold: number }>('/projects/stats').catch(() => ({ active: 0, completed: 0, onHold: 0 }))
+}
+
+export function fetchClients(): Promise<ClientUser[]> {
+  return api<ClientUser[]>('/users?role=client')
 }

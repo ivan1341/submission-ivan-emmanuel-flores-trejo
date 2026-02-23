@@ -7,6 +7,7 @@ export function Register() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+  const [isAdmin, setIsAdmin] = useState(false)
   const [loading, setLoading] = useState(false)
   const { register, error, setError } = useAuth()
   const navigate = useNavigate()
@@ -17,7 +18,12 @@ export function Register() {
     if (!email.trim() || !password) return
     setLoading(true)
     try {
-      await register(email.trim(), password, name.trim() || undefined)
+      await register(
+        email.trim(),
+        password,
+        name.trim() || undefined,
+        isAdmin ? 'admin' : 'client',
+      )
       navigate('/')
     } catch {
       // error set in context
@@ -29,7 +35,7 @@ export function Register() {
   return (
     <div className="flex min-h-screen flex-col bg-gray-100">
       <div className="flex flex-1 items-center justify-center px-4">
-        <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
+        <div className="w-full max-w-lg rounded-lg bg-white p-6 shadow-md sm:p-8 md:max-w-xl">
         <h1 className="mb-6 text-2xl font-bold text-gray-800">Registro</h1>
         {error && (
           <div className="mb-4 rounded bg-red-100 p-3 text-sm text-red-700">{error}</div>
@@ -70,6 +76,21 @@ export function Register() {
               minLength={6}
               autoComplete="new-password"
             />
+          </div>
+          <div className="space-y-1">
+            <label className="flex items-center gap-2 text-sm text-gray-700" htmlFor="isAdmin">
+              <input
+                id="isAdmin"
+                type="checkbox"
+                checked={isAdmin}
+                onChange={(e) => setIsAdmin(e.target.checked)}
+                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <span>Quiero registrarme como administrador</span>
+            </label>
+            <p className="text-xs text-gray-500">
+              Sólo debe usarse para miembros del equipo interno.
+            </p>
           </div>
           <button
             type="submit"

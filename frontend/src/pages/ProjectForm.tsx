@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { fetchProject, createProject, updateProject, type Project } from '@/lib/api'
+import { fetchProject, createProject, updateProject, fetchClients, type ClientUser, type Project } from '@/lib/api'
 
 export function ProjectForm() {
   const { id } = useParams<{ id: string }>()
@@ -10,9 +10,18 @@ export function ProjectForm() {
   const [description, setDescription] = useState('')
   const [status, setStatus] = useState<'active' | 'completed' | 'on-hold'>('active')
   const [clientId, setClientId] = useState('')
+  const [clients, setClients] = useState<ClientUser[]>([])
+  const [loadingClients, setLoadingClients] = useState(true)
   const [loading, setLoading] = useState(false)
   const [loadProject, setLoadProject] = useState(!!id)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetchClients()
+      .then(setClients)
+      .catch(() => setClients([]))
+      .finally(() => setLoadingClients(false))
+  }, [])
 
   useEffect(() => {
     if (!id) return
@@ -54,7 +63,7 @@ export function ProjectForm() {
       <Link to={id ? `/admin/projects/${id}` : '/admin/projects'} className="text-sm text-blue-600 hover:underline">← Volver</Link>
       <h1 className="mb-6 mt-2 text-2xl font-bold text-gray-800">{isEdit ? 'Editar proyecto' : 'Nuevo proyecto'}</h1>
       {error && <div className="mb-4 rounded bg-red-100 p-3 text-red-700">{error}</div>}
-      <form onSubmit={handleSubmit} className="max-w-xl space-y-4">
+      <form onSubmit={handleSubmit} className="w-full max-w-2xl space-y-4">
         <div>
           <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700">Nombre *</label>
           <input
@@ -89,14 +98,26 @@ export function ProjectForm() {
           </select>
         </div>
         <div>
-          <label htmlFor="clientId" className="mb-1 block text-sm font-medium text-gray-700">ID del cliente (opcional)</label>
-          <input
+          <label htmlFor="clientId" className="mb-1 block text-sm font-medium text-gray-700">Cliente asignado (opcional)</label>
+          <select
             id="clientId"
             value={clientId}
             onChange={(e) => setClientId(e.target.value)}
-            placeholder="UUID del cliente asignado"
             className="w-full rounded border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
+            disabled={loadingClients}
+          >
+            <option value="">{loadingClients ? 'Cargando clientes...' : 'Sin asignar'}</option>
+            {clients.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.name ? `${c.name} (${c.email})` : c.email}
+              </option>
+            ))}
+          </select>
+          {!loadingClients && clients.length === 0 && (
+            <p className="mt-1 text-xs text-gray-500">
+              No hay clientes registrados aún.
+            </p>
+          )}
         </div>
         <button
           type="submit"

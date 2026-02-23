@@ -115,7 +115,7 @@ export function ProjectDetail() {
         </form>
         <ul className="space-y-3">
           {comments.length === 0 && <p className="text-gray-500">Sin comentarios aún.</p>}
-          {comments.map((c) => (
+          {[...comments].reverse().map((c) => (
             <li key={c.id} className="rounded border bg-gray-50 p-3">
               <p className="text-sm font-medium text-gray-700">{c.user?.email ?? c.userId}</p>
               <p className="text-gray-800">{c.content}</p>

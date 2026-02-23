@@ -32,7 +32,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             )}
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-600">{user?.email}</span>
+            <span className="text-sm text-gray-600">{user?.name}</span>
             <button
               type="button"
               onClick={handleLogout}
@@ -43,7 +43,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </nav>
-      <main className="mx-auto flex-1 max-w-6xl px-4 py-6">{children}</main>
+      <main className="mx-auto flex-1 max-w-6xl px-4 py-6"  style={{ width: '90%' }}>{children}</main>
       <Footer />
     </div>
   )

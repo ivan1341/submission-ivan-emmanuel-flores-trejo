@@ -5,6 +5,7 @@ import { swaggerSpec } from './config/swagger.js'
 import authRoutes from './routes/auth.js'
 import projectRoutes from './routes/projects.js'
 import dashboardRoutes from './routes/dashboard.js'
+import usersRoutes from './routes/users.js'
 
 const app = express()
 const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:5173'
@@ -17,6 +18,7 @@ app.get('/api/docs.json', (req, res) => res.json(swaggerSpec))
 app.use('/api/auth', authRoutes)
 app.use('/api/projects', projectRoutes)
 app.use('/api/dashboard', dashboardRoutes)
+app.use('/api/users', usersRoutes)
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }))
 
