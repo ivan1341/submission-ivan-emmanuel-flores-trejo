@@ -83,6 +83,23 @@ Edit `.env` and set `MONGODB_URI` (e.g. `mongodb://localhost:27017/client_portal
 
 ---
 
+## Testing
+
+Unit/integration tests use Node's built-in test runner and **MongoDB Memory Server** (no real MongoDB required).
+
+```bash
+npm install   # installs supertest + mongodb-memory-server as devDependencies
+npm test     # runs tests in tests/
+```
+
+Tests cover:
+- **Auth:** register (success, validation, duplicate email), login (success, wrong password), GET /api/auth/me
+- **Projects:** list (auth, role filtering), create/update/delete (admin only), validation, GET by id, stats
+- **Comments:** add comment, validation
+- **Dashboard:** admin stats, client assigned count, 401 without token
+
+---
+
 ## API Documentation
 
 Swagger/OpenAPI should be accessible at `/api/docs`
