@@ -1,0 +1,27 @@
+name: Deploy to Amazon EC2
+
+on:
+  push:
+    branches: [ "master" ] # Se ejecuta cuando subes cambios a master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/submission-ivan-emmanuel-flores-trejo
+            git pull origin master
+            # Crear el archivo .env desde los secretos de GitHub (opcional pero recomendado)
+            echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" > .env
+            echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> .env
+            # El comando que ya conoces:
+            sudo docker-compose up --build -d
