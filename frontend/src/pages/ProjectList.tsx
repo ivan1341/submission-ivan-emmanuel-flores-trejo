@@ -23,7 +23,7 @@ export function ProjectList() {
         <h1 className="text-2xl font-bold text-gray-800">Todos los proyectos</h1>
         <Link
           to="/admin/projects/new"
-          className="rounded bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700"
+          className="rounded bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 text-center"
         >
           Nuevo proyecto
         </Link>
