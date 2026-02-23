@@ -5,7 +5,7 @@ const swaggerSpec = {
     version: "1.0.0",
     description: "API for Client Portal - Auth, Projects, Comments, Dashboard",
   },
-  servers: [{ url: "http://localhost:3000", description: "Local" },{ url: "http://18.209.50.230/:3000", description: "Remote" }],
+  servers: [{ url: "http://localhost:3000", description: "Local" },{ url: "http://18.209.50.230:3000", description: "Remote" }],
   paths: {
     "/api/auth/register": {
       post: {
