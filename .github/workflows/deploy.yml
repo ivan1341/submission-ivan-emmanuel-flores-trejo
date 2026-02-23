@@ -5,6 +5,27 @@ on:
     branches: [ "master" ] # Se ejecuta cuando subes cambios a master
 
 jobs:
+# --- JOB DE PRUEBAS ---
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (Si tu backend es Node)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # O la versión que uses
+
+      - name: Install Dependencies
+        run: |
+          cd backendv
+          npm install
+
+      - name: Run Tests
+        run: |
+          cd backendv
+          npm test
   deploy:
     runs-on: ubuntu-latest
     steps:
