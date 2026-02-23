@@ -20,8 +20,8 @@ jobs:
           script: |
             cd /home/ubuntu/submission-ivan-emmanuel-flores-trejo
             git pull origin master
-            # Crear el archivo .env desde los secretos de GitHub (opcional pero recomendado)
+            # Crear el archivo .env desde los secretos de GitHub
             echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" > .env
             echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> .env
-            # El comando que ya conoces:
-            sudo docker-compose up --build -d
+            # Docker compose up
+            sudo docker compose up --build -d
