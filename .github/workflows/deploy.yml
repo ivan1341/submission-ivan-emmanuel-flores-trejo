@@ -19,12 +19,12 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd backendv
+          cd backend
           npm install
 
       - name: Run Tests
         run: |
-          cd backendv
+          cd backend
           npm test
   deploy:
     runs-on: ubuntu-latest
