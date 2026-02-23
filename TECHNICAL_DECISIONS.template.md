@@ -4,10 +4,10 @@
 
 | Field | Value |
 |-------|-------|
-| **Name** | |
-| **Date Started** | |
-| **Date Completed** | |
-| **Total Time Spent** | |
+| **Name** | Ivan Emmanuel Flores Trejo|
+| **Date Started** | 19 Febrero 2026 |
+| **Date Completed** | 23 Febrero 2026 |
+| **Total Time Spent** | 20 Hrs |
 
 ---
 
@@ -23,17 +23,17 @@
 
 | Component | Choice | Why? |
 |-----------|--------|------|
-| Framework | | |
-| Database | | |
+| Framework | NodeJs and Express | |
+| Database | MongoDb| |
 | ORM | | |
 
 ### Frontend
 
 | Component | Choice | Why? |
 |-----------|--------|------|
-| Framework | | |
+| Framework | React | |
 | State Management | | |
-| Styling | | |
+| Styling | Tailwind | |
 
 ---
 
